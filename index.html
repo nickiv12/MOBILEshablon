@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Переключаем IE в режим edge если он другом режиме  -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- ГЛАВНЫЕ ФАЙЛЫ со стилями и скриптами -->
+<!--	<link rel="stylesheet" type="text/css" href="CSSmain/normalize.css">-->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<!--	подключаем js и css файлы СТРАНИЦЫ -->
+	<style>
+	/* === ДЛЯ БЫСТРОГО ОТОБРАЖЕНИЯ ВЕРХНЕЙ ЧАСТИ САЙТА  =================   */
+		html {
+			box-sizing: border-box; /* https://ymatuhin.ru/front-end/better_box_sizing/*/
+		/* шрифт - семейство, размер, цвет.	*/
+			font-family: Helvetica, Arial, Verdana, sans-serif; /*   */
+			font-size: 0.72em;
+			line-height: 1.2;
+			color: #585877;
+		}
+		*, *:before, *:after { box-sizing: inherit; } /* наследуют  box-sizing от родителя  */
+
+		/* 1. === каркас сайта - НАЧАЛО */
+body {
+	margin: 0px auto;  /*Чтобы прижать к верху страницы обязательно для body - 0px , auto - на всякий случай */
+	border-color: aquamarine;
+}
+.cont-site {
+	width: 100%;
+	max-width: 35cm;/* ширина ВСЕГО сайта */
+	margin: 0px auto; /* чтобы выровнять по центру - auto, a 0px - на всякий случай */
+	justify-content: space-between;
+}
+.logo {
+	min-height: 40px;
+	background-color: aquamarine;
+	text-align: center;
+}
+/* высоту описания в 0		*/
+.model-inputs p.height0 {height: 0;}
+#model_range_1 {
+	display: block;
+	width: 100%;
+}
+
+
+	/* === РАБОЧИЕ СТИЛИ начало */
+.b {border: 1px solid brown;} /* рабочая рамка*/
+/*--- рабочие стили конец */
+
+.sidebar {
+	padding: 1%;
+	background-color: #a2a2a2;
+	width: 180px; /*!!!!!!!! НЕ ТРОГАТЬ !!!!!!! ширина САЙДБАРА */
+	min-width: 13%;
+	overflow: hidden;
+	transition: all 0.3s;
+}
+.article {
+	padding: 1%;
+	background-color: #c2c2c2;
+	width: 61%; /* ширина ОСНОВНОЙ ЧАСТИ */
+}
+/* рекламная колонка */
+.ad {
+	padding: 1%;
+	background-color: #e2e2e2;
+	width: 26%; /* ширина ОСНОВНОЙ ЧАСТИ */
+}
+/* ====== ПАНЕЛЬ УПРАВЛЕНИЯ ======= */
+.cp-1 {
+	padding: 5px;
+	min-height: 50px; /* ДЛЯ БРАУЗЕРОВ, НЕ понимающих vw и vh */
+	min-height: 10vw; /* ДЛЯ БРАУЗЕРОВ, понимающих vw и vh*/
+  margin: 0 7px;
+  border: 1px solid #bbb;
+	margin: auto;
+  color: #666666;
+  background-color: #f6f6f6;
+  box-shadow: inset 0 0 0.7em #BABABA; /* ВНУТРЕННЯЯ ТЕНЬ для всех  браузеров кроме ИЕ8 и опера-мини*/
+  border-radius: 0.5em;
+  /*width: 790px; !!! указыаю в px так как если указывать в 100% то при позиционировании fixed  #controlPanel раздвигается вправо - для него родителем становится окно браузера  */
+
+	/* Префиксы для совсем СТАРЫХ БРАУЗЕРОВ http://stackoverflow.com/questions/16595587/webkit-flex-not-displaying-properly-on-android */
+	display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+	/* Префиксы  */
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	/* современное свойство */
+	display: flex;
+	/* префиксы для row-reverse	*/
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: reverse;
+	-ms-flex-direction: row-reverse;
+	flex-direction: row-reverse;
+
+	justify-content: space-between;
+}
+
+.code {
+	width: 59%;
+	min-height: 100px;
+	background-color: azure;
+}
+/* ===  блок инпутов ======================== */
+.model-inputs {
+	width: 39%; /* ширина ВСЕГО блока */
+	margin: 0.7em 0 0.7em 0.7em; /* поля блока инпутов, чтобы не наезжать на внутреннюю тень */
+}
+/* описания к  инпутам в параграфах */
+.model-inputs p {
+	margin: 0.2em 0 ; /* описания к инпутам - задаем поля */
+	padding: 0 0 0 0.7em; /* описания к инпутам - отступ слева */
+	background-color: #e8e4e4; /* описания к инпутам - фоновый цвет */
+	text-align: left;
+	text-indent: 0; /* отступ первой строки параграфа */
+	-webkit-transition: height 500ms;
+     -moz-transition: height 500ms;
+     -ms-transition: height  500ms;
+      -o-transition: height  500ms;
+         transition: height  500ms; /* анимация при ЛЮБОМ изменении высоты */
+	overflow: hidden; /* прячем текст, т.к чтобы работал transition нужно ЯВНО указывать высоту, а в этом случае текст вываливается за параграф */
+}
+/* ---- ОГЛАВЛЕНИЕ СТРАНИЦЫ --- */
+.toc {
+	float: right;
+	width: 250px;
+	min-height: 100px;
+	margin: 2px 10px; /* поля */
+  border: 1px solid #bbb;  /* рамка */
+	padding: 5px; /* отступы */
+  color: #666666;
+  background-color: #f6f6f6;
+  box-shadow: inset 0 0 10px #BABABA; /* ВНУТРЕННЯЯ ТЕНЬ для всех  браузеров кроме ИЕ8 и опера-мини*/
+  border-radius: 5px; /* радиус углов */
+}
+/* cсылка в оглавление */
+.toc-c {
+	padding-left: 20px;
+	font-weight: normal;
+	font-size: 80%;
+	color: green;
+}
+.toc ol {padding-left: 15px; /*сдвигаем пункт списка от левой границы родителя */
+}
+.toc ol li {padding-bottom: 3px;}
+/*.toc ol ol {padding-top: 23px;}*/
+
+/* Двухуровневый нумерованный список */
+.toc ol>li {display: block;}
+.toc ol>li:before {
+	content:counters(item,".") ". ";
+	counter-increment:item;
+}
+ol {
+	counter-reset:item;
+}
+h3:target {
+	background-color: #b8d5fc;
+}
+h3.tech-info {
+	text-align: left;
+	font-weight: bold;
+	margin-left: 0px;
+	width: 400px;
+}
+h3.tech-info:target {
+	background-color: #b8d5fc;
+}
+.toc ol li a {text-decoration: none;}
+.toc ol li a:visited {
+	text-decoration: none; /* убираю подчеркивание */
+	color: #585877; /* делаю цвет посещенной ссылки обычным для сайта */
+}
+/* конец  ОГЛАВЛЕНИЕ */
+/* ===== МЕДИА ПРАВИЛА =================	*/
+@media only screen and (max-width: 30cm) {
+	.ad {display: none;} /* удаляем рекламную колонку */
+	.sidebar {width: 20%;}
+	.article {width: 80%;}
+	.model-inputs div label {font-size: 1.2rem;} /* увеличиваем текст в label инпута */
+}
+@media only screen and (max-width: 25cm) {
+	.model-inputs div label {font-size: 1.4rem;} /* увеличиваем текст в label инпута */
+}
+/* Для маленьких экранов кнопки ДАЛЬШЕ друг от друга - НАЙДЕНО ОПЫТНЫМ ПУТЕМ в PageSpeedInsights
+	- НЕ ПЕРЕМЕЩАТЬ во внешний файл - сразу снижается с 99% до 91%*/
+@media only screen and (max-width: 20cm) {
+	/*  оставляем только 1-у колонку */
+	.ad {display: none;}
+	.sidebar {display: none;}
+	.article {width: 100%;}
+	/* удаляем flex и делаем ширину инпутов и кода 100% */
+	.cp-1 {display: block;}
+	.code {width: 100%;}
+	.model-inputs {width: 100%; color: red;} /* цвет для проверки работы */
+	.model-inputs div label {font-size: 20px;} /* меньше 20px НЕЛЬЗЯ - гугл снижаает на 15% удобство для пользователей */
+
+	/* Увеличиваем высоту ссылок в ОГЛАВЛЕНИИ (размер активных элементов)	*/
+ .toc ol li  {margin-bottom: 5px;}
+ .toc ol li a {
+		font-size: 16px;
+/*		padding-bottom: 16px; НЕ ИСПОЛЬЗОВАТЬ - не помогает увеличению активных элементов */
+	}
+	.toc ol ol {padding-top: 6px;}  /*вложенный список НАДО отодвинуть от верхней строки - 2%*/
+	.toc-c {font-size: 90%;}
+}
+
+@media only screen and (max-width: 20cm) {
+}
+/*@media screen and (orientation: landscape) {.article {color: red;}}*/
+
+
+/* --- 1. каркас сайта - КОНЕЦ */
+	</style>
+
+	<title>mobile-v01-03</title>
+</head>
+<body>
+	<div class="cont-site">
+	<div class="logo">ЛОГОТИП</div>
+	<div class="main  flex space-between">
+		<div class="sidebar" lang="en">
+			<h3>sidebar</h3>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum soluta quos, molestiae accusantium rem eligendi repellendus
+			velit quae nesciunt vitae ullam, error quod officia quia! Modi eligendi molestias temporibus aliquam tenetur. Id rem eligendi
+			 voluptatum, omnis, veniam aut perspiciatis modi nulla dolor, tempora debitis quas necessitatibus accusamus deleniti fugiat facilis.
+		</div>
+		<div class="article"  lang="ru">
+				<h3><span class="tp" data-translate="">WHITE-SPACE</span></h3>
+<span class="tp" data-translate="">flag</span>
+			<!--	ОГЛАВЛЕНИЕ начало			-->
+				<div class="toc" >
+					<h3 class="bold" id="toc_a">Оглавление страницы:</h3>
+					<ol>
+						<li><a href="#toc_1">Введение.</a></li>
+						<li><a href="#toc_2">Пример.</a></li>
+						<li><a href="#toc_3">Техническая информация.</a>
+							<ol>
+								<li><a href="#toc_3_1">Краткая информация</a></li>
+								<li><a href="#toc_3_2">Синаксис</a></li>
+								<li><a href="#toc_3_3">Поддержка браузерами</a></li>
+							</ol>
+
+						</li>
+					</ol>
+				</div>
+<!--	ОГЛАВЛЕНИЕ конец			-->
+				<h3 class='bold' id="toc_1">
+					1. Введение.
+					<a href="#toc_a" class='toc-c'>в оглавление</a>
+				</h3>
+				<p>
+					При создании текста в любом текстовом редакторе широко используются
+					символы пробела, табуляции,
+					перевода строки. Разные компьютерные программы и языки 	программирования могут по разному
+					обрабатывать эти символы и их комбинации. Вот и язык разметки HTML5 обрабатывает 	их своим особым образом.
+					Все символы из группы называемой "пробельный контент" игнорируются.
+					<br>За исключением:
+					<br>1. Символа пробела. Несколько подряд идущих пробелов отображаются как один (сворачиваются).
+					<br>2. Символа табуляции. Использовать табуляцию не рекомендуется, так как ее размеры могут различаться в редакторе,
+						в котором вводился код и в браузерах которые будут эту табуляцию отображать.
+					<br>3. Переносов строки:
+					<br>&nbsp;&nbsp;&nbsp;<span class="bold"> - автоматический перенос</span> - перенос строки добавляется браузером так,
+						чтобы текст в строке поместился в заданную ширину блока. Чтобы его увидеть в примере, меняйте ширину элемента ползунком.
+					<br>&nbsp;&nbsp;&nbsp; <span class="bold">- перенос в коде </span> - перенос строки сделанный в редакторе
+					 с помощью клавиши <span class="tp" data-translate="">Enter</span> - в коде невидим.
+					<br>&nbsp;&nbsp;&nbsp; <span class="bold">- перенос тегом &lt;br&gt;</span> - строки переносятся там где вставлен тег &lt;br&gt;(от слова <span class="tp" data-translate="">break</span>). Переносит текст ВСЕГДА и свойство
+					<span class="tp" data-translate="">white-space</span> на этот перенос не влияет.
+				</p>
+				<h3 class='bold' id="toc_2">2. Пример. <a href="#toc_a" class='toc-c'>в оглавление</a></h3>
+				<p>
+					В примере для css-свойства <span class="tp" data-translate="">white-space</span>  рассматриваются: сворачивание пробелов, автоматический перенос, перенос в коде и показано, что
+					тэг <b>&lt;br&gt;</b> всегда выполняет перенос (вообще-то правильнее будет говорить разрыв строки). Тэг <b>&lt;br&gt;</b>
+					расположен в коде сразу за css-свойством
+					<span class="tp" data-translate="">background</span>.
+
+
+			<!-- cp - control panel - ПАНЕЛЬ УПРАВЛЕНИЯ		-->
+
+			<div class="cp-1">
+				<!-- начало	МОЙ  РАСЦВЕЧЕННЫЙ КОД. 	-->
+				<div class="code">
+					<h3>Текст в редакторе</h3>
+					<div class="color-code"><b>≤style≥</b>
+  <s>div {</s> <em>/* 2 пробела¯*/</em>
+    <s>background:</s><b>&lt;br&gt;</b>      <q>url(img/Caption.png) 50% 80% no-repeat</q>,<em> /*4п+<b>&lt;br&gt;</b>+6п*/</em>
+      <q>url(img/Featured-Area.png)¯no-repeat</q>, <em>/* 6 пробелов¯*/</em>
+      <q>#c7c7c7</q> <em>/* 6 пробелов */</em>
+    ; <em> /* 4 пробела */</em>
+  <s>}</s> <em> /* 2 пробела */</em>
+<b>≤/style≥</b></div>
+
+<!-- ДЕМОНСТРАЦИЯ КОДА для разных значений свойства white-space-->
+	<h3>Демонстрация текста для разных значений свойства white-space</h3>
+	<div class="demo-code"><b>≤style≥</b>
+  <s>div {</s> <em>/* 2 пробела¯*/</em>
+    <s>background:</s><br>      <q>url(img/Caption.png) 50% 80% no-repeat</q>,<em> /*4п+<b>&lt;br&gt;</b>+6п*/</em>
+      <q>url(img/Featured-Area.png)¯no-repeat</q>, <em>/* 6 пробелов¯*/</em>
+      <q>#c7c7c7</q> <em> /* 6 пробелов */</em>
+    ; <em> /* 4 пробела */</em>
+  <s>}</s> <em> /* 2 пробела */</em>
+<b>≤/style≥</b></div>
+<!-- конец	МОЙ  РАСЦВЕЧЕННЫЙ КОД. 	-->
+
+				</div>
+				<div class="model-inputs">
+						<h3><s>white-space: </s> <q id="model_value"></q>;</h3>
+						<div>
+							<label><input type="radio" id="model_inp_1" checked="checked" name="model" value="normal"> <q>normal</q></label>
+							<p id="model_p_1" data-height="">
+								- Пробелы сворачиваются.
+								<br> - Все переносы, КРОМЕ переноса Enter, сохраняются.
+							</p>
+						</div>
+						<div>
+							<label><input type="radio" id="model_inp_2" name="model" value="pre"> <q>pre</q></label>
+								<p id="model_p_2" class="height0" data-height="">
+							- ВСЕ пробелы отображаются.
+							<br> - Все переносы, КРОМЕ автоматического, сохраняются.
+							</p>
+						</div>
+						<div>
+							<label><input type="radio" id="model_inp_3"  name="model" value="pre-line"> <q>pre-line</q></label>
+								<p id="model_p_3" class="height0" data-height="">
+								- Пробелы сворачиваются в один.
+								<br>- ВСЕ переносы сохраняются.
+								<br>Атоматический перенос виден лишь при уменьшении ширины.
+							</p>
+						</div>
+						<div>
+							<label><input type="radio" id="model_inp_4"  name="model" value="pre-wrap"> <q>pre-wrap</q></label>
+							<p id="model_p_4" class="height0" data-height="">
+								- ВСЕ пробелы сохраняются
+								<br>- ВСЕ возможные переносы сохраняются.
+								<br>Атоматический перенос виден лишь при уменьшении ширины.
+							</p>
+						</div>
+					  <div>
+							<label><input type="radio" id="model_inp_5" name="model" value="nowrap"> <q> nowrap</q></label>
+							<p id="model_p_5" class="height0" data-height="">
+								- Пробелы сворачиваются.
+								<br>-Перенос строки только с помощью тега &lt;br /&gt;
+							</p>
+						</div>
+
+						<fieldset class='model-ranges'>
+							<legend id="model_legend_1"> Значение = </legend>
+							<input type="range" id="model_range_1" min="0" max="100" step="1" value="50" oninput="model_func_1()">
+							<span></span>
+						</fieldset>
+					</div>
+
+			</div>
+			<p>
+			Ea itaque provident ut, corrupti vel nihil quas id maiores qui velit nostrum cum autem asperiores saepe recusandae, tenetur minus dolores ipsam sit sapiente eum officia sequi libero. Saepe delectus labore error, voluptatibus laborum libero beatae voluptas unde. Eius molestias optio porro quidem, placeat animi facere, beatae autem incidunt quasi iure eaque perferendis sapiente! Quae pariatur non, repellat laborum numquam recusandae quas consequatur, magni maiores nostrum ipsam nam ex voluptates. Ut amet saepe ab eos enim reiciendis nemo blanditiis quisquam nihil autem sed, quas ratione id eum voluptatibus, provident. Nihil ea quam, temporibus dolores consectetur commodi ipsum autem vel quos. Eos maxime repellendus itaque quasi possimus ex pariatur, fuga sapiente veritatis sed voluptas quae. Fugiat vero autem adipisci sunt voluptas. Nemo molestias accusantium excepturi facilis inventore, quaerat unde tempore quibusdam. Non delectus perspiciatis iure, sint totam asperiores voluptatum, officiis expedita corrupti incidunt consequuntur. Ea molestias quia modi maxime corrupti a excepturi facilis voluptas, fugiat mollitia temporibus ab quae quo numquam accusantium consectetur quis, tenetur voluptate placeat aliquid sequi magnam! Autem debitis sapiente quisquam, sed in doloribus incidunt, iure optio rerum excepturi obcaecati distinctio esse quo mollitia. Consequatur repellendus, doloribus numquam totam laborum laudantium architecto est corporis quae atque! Dolorum rem aperiam ut corrupti quos nobis blanditiis, tenetur minus, deleniti consequuntur libero pariatur eius! Veritatis laborum, temporibus recusandae, magnam at architecto perspiciatis officiis dicta ipsa facere illo molestias, optio quia laudantium quisquam nobis sint. Accusantium nulla quisquam, obcaecati illo in quidem rem nesciunt fuga reprehenderit ullam repudiandae ea deserunt, sunt, tempora saepe enim voluptatibus porro odit ex culpa neque dignissimos aliquid recusandae ipsum. Animi sed necessitatibus quos unde, repudiandae corporis reprehenderit consequuntur. Quidem ipsa, magni eveniet cupiditate facilis ipsam nesciunt, in modi repellendus? Laudantium, alias magni quas ullam distinctio suscipit a porro, voluptate nemo rerum debitis iusto neque non, veniam soluta. Velit dolorum natus numquam voluptatibus laborum. Pariatur praesentium illo reprehenderit neque soluta. Rerum quia velit harum voluptate facilis veritatis eaque quo tempore excepturi dolorum dolore culpa itaque fugiat, ipsa libero repellat doloribus? Voluptatibus eveniet ducimus unde ea dolorum rerum, molestiae officia, doloremque eum architecto tempora enim quidem atque repudiandae nisi eius amet adipisci id eos repellat. Esse error minima amet, voluptatibus, dicta deserunt doloribus dolores et tempore quos veritatis odio quod voluptate labore laborum natus molestias repellat, reiciendis, eligendi odit! Vero provident deserunt ad voluptate velit omnis explicabo adipisci, commodi error unde, perferendis repellat voluptatum molestiae eius, quia quasi. Illo et aut, nisi
+			</p>
+		</div>
+<!--	-->
+		<div class="ad">
+			<h3>ad</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam eaque nemo animi optio eveniet, illo illum praesentium accusantium distinctio vitae doloribus laborum dolorem iste consequatur ab alias corporis cumque tenetur saepe nostrum, vel ratione at. Vitae vel iste accusantium quod harum quis eum, unde, autem eaque atque obcaecati iusto aspernatur. Aliquam, eos dolor sequi quisquam hic repudiandae tempora recusandae commodi pariatur odit quos nobis ex soluta, inventore cum ipsa tempore dignissimos harum sapiente reiciendis facilis, fugiat laboriosam aut rem. Voluptate numquam fugit necessitatibus modi, repellat, veritatis quia alias fugiat optio officiis quos pariatur, esse eligendi? Culpa est adipisci quos laborum perspiciatis illum, impedit enim beatae esse at consectetur, eum reprehenderit, deleniti exercitationem libero. Unde expedita in repellat alias accusamus blanditiis dolor quaerat doloremque illum repellendus quibusdam reprehenderit obcaecati id eveniet libero, mollitia doloribus, praesentium eum rerum modi nobis! Molestiae, nesciunt, vero. Aspernatur quaerat iusto neque, consequuntur, excepturi corporis eveniet facilis.</p>
+		</div>
+
+	</div>
+		<!-- 1. ЗАГОЛОВОК начало  -->
+	</div>
+	<!-- СТИЛИ -->
+<link rel="stylesheet" type="text/css" href="CSSmain/main.css">
+	<!-- СКРИПТЫ -->
+<script src="JSmain/jquery-2.2.3.min.js"></script>
+<script src="JSmain/main.js"></script>
+<!--P ДЛЯ МОДУЛЯ АНГЛИЙСКИХ СЛОВ	-->
+	<p id="for-script"></p>
+</body>
+</html>

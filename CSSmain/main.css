@@ -1,0 +1,122 @@
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+	font-weight: lighter;
+	margin: 3px auto;
+}
+
+/* === вариант по источник http://makoveckij.ru/vsplyivayushhie-podskazki-na-css/#.V2BdSNKLS01 === */
+.tp{
+	color: #0000EE;/* цвет английского текста */
+  position: relative;
+}
+.tp:hover {cursor: help;}/* тип курсора при наведении */
+
+/* появляющаяся подсказка - в псевдоклассе after	*/
+.tp:hover::after{
+  content: attr(data-translate);/* подставляю в content содержимое атрибута */
+	font-family: UbuntuMono-R;/* подключаю свой шрифт, в котором есть знаки транскрипции */
+	font-size: 1.2rem;/* надо задать размер, иначе наследует от родителя и будет разный размер у разных элементов */
+	text-align: left;/* выравниваю текст влево*/
+	text-indent: 0;/* надо обязательноу указать, иначе будет отступ у первой строки, а вторая строка будет выступать слева */
+	/* темно-синий вариант	*/
+	color: #fff;/* цвет шрифта */
+	border: 2px solid #ccc;/* я оставил старый - не так черно */
+  opacity: .9;/* прозрачность */
+	background-color: #1e2227;/* фоновый цвет */
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0)); /* градиент */
+	text-shadow: 0 1px 0 #000;
+  opacity: .9;/* прозрачность */
+	padding: 5px;/* отступы */
+  border-radius: 5px;
+	/* позиционировани всплывающей подсказки	*/
+  position: absolute;
+  width: 300px;
+  bottom: 21px;
+  left: 0;/* позиционируем от начала слова */
+  z-index: 98;/* z-index не работает, НАВЕРНО аfter перекрывает before */
+}
+.tp-left:hover::after {left: -200px;}
+.tp:hover::before{ /* Добавляем стрелочку внизу блока всплывающей подсказки */
+  border: solid;
+  border-color: #ccc transparent; /* серая стрелка*/
+  border-color: #373B3F transparent; /* темно-синяя стрелка */
+  border-width: 6px 6px 0 6px;/* делаем из рамки стрелку вниз */
+  bottom: 15px;
+  content: "";/* без контента */
+  position: absolute;
+  left: 50%;
+  z-index: 99;/* z-index не работает, НАВЕРНО аfter перекрывает before */
+}
+/* управляем показом подсказок */
+.no-tp:hover:after {visibility: hidden;}
+.no-tp:hover:before {visibility: hidden;}
+.no-tp:hover {cursor: auto;}
+/* --------- КОНЕЦ всплывающей подсказки ------------------*/
+/* --- ПОКАЗ - СКРЫТИЕ параграфа с описанием свойства --- */
+.flex {
+	/* Префиксы для совсем СТАРЫХ БРАУЗЕРОВ http://stackoverflow.com/questions/16595587/webkit-flex-not-displaying-properly-on-android */
+	display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+	/* Префиксы  */
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	/* современное свойство */
+	display: flex;
+}
+.space-between {
+	justify-content: space-between;
+}
+.bold {font-weight: bold;} /* сделать текст элемента жирным */
+/* ----  0.1. ЗАГРУЖАЕМЫЙ для кода моноширинный ШРИФТ -------- */
+@font-face {
+    font-family: UbuntuMono-R ; /* Имя шрифта UbuntuMono-R.ttf*/
+    src: url(../FONTSmain/UbuntuMono-R-my-change-3.ttf);  /*Путь к файлу со шрифтом */
+}
+
+/* ==== 0.2. Расцвечивание кода с помощью одиночных тэгов =================== */
+b { /* тэг в - html ВСЕ тэги <div>, CSS - селекторы, цвет - #446FBE. НЕ Brackets (мой) - синее*/
+  color: #3B00FF ; /* html ВСЕ тэги <div> - не Brackets*/
+  font-weight: normal;
+}
+u { /* тэг u - ВСЕ html-атрибуты тэгов =: class=, style=, href=, rel=, http-equiv=, цвет #6D8600 - Brackets */
+  text-decoration: none;
+  color: #6D8600;
+}
+q, q.tp { /* тэг q - ВСЕ html-атрибутов ЗНАЧЕНИЯ с кавычками "Content-Type", "https://...", названия классов (!!! КРОМЕ ЗНАЧЕНИЙ style) */
+  quotes: none;/* убираем перечеркивание */
+  color: #E88501;
+}
+s { /* тэг s - CSS-свойств НАИМЕНОВАНИЕ вместе с двоеточием и точкой с запятой. background: цвет - #A357BD Brackets */
+  text-decoration: none;/* убираем перечеркивание */
+  color: #A357BD;
+}
+/* Цвет текста шрифта #585877, но можно и ЧЕРНЕЕ*/
+em { /* комментарии Brackets*/
+  font-style: normal; /* убираем курсив*/
+  color: #949494;
+ /* font-weight: bolder;*/
+}
+/* !!! Этот тэг ЕЩЕ НЕ ПЕРЕДЕЛАЛ*/
+i {  /* ВСЕ знаки = + , .  ‘ ‘’ ;  /  () {}   */
+  font-style: normal; /* убираем курсив*/
+  color: red;
+} /* -----------------------------*/
+
+.color-code, .demo-code {
+	white-space: pre-wrap;
+	font-family: UbuntuMono-R;
+	border: 1px solid grey;
+	margin: 6px 6px 6px 6px;
+
+}
+/* ---  КОНЕЦ Расцвечивание кода ----------------------- */
+
+
+
+
+/* ====== конец ПАНЕЛЬ УПРАВЛЕНИЯ ======= */
+
+
